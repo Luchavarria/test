@@ -1,0 +1,145 @@
+----- SP -----
+CREATE PROCEDURE <Procedure_Name, sysname, ProcedureName>
+<@Param1> <Datatype_For_Param1> = <Default_Value_For_Param1>,
+<@Param2> <Datatype_For_Param2> = <Default_Value_For_Param2>
+AS
+BEGIN
+
+END
+-----
+CREATE PROCEDURE dbo.AddData @a int, @b int
+AS
+BEGIN TRY
+INSERT INTO TableWithKey VALUES (@a, @b)
+END TRY
+BEGIN CATCH
+SELECT ERROR_NUMBER() ErrorNumber,
+ERROR_MESSAGE() [Message]
+END CATCH
+-----
+BEGIN TRY
+
+BEGIN TRAN
+INSERT ...
+INSERT ...
+COMMIT TRAN
+
+END TRY
+BEGIN CATCH
+
+ROLLBACK TRAN
+SELECT MESSAGE_NUMBER...
+
+END CATCH
+
+----- FN -----
+** ESCALAR **
+CREATE FUNCTION [PROPIETARIO.] NOMBRE_FUNCION
+([{@PARAMETER TIPO DE DATO [=DEFAULT]} [,..N]])
+RETURNS VALOR_ESCALAR
+[AS]
+BEGIN
+
+CUERPO DE LA FUNCION
+RETURN EXPRESION_ESCALAR
+
+END
+** F.TABLA **
+CREATE FUNCTION [propietario.] nombre_funcion
+([{ @parameter tipo de dato [ = default]} [,..n]])
+RETURNS TABLE
+[AS]
+
+RETURN [(] Sentencia SQL [)]
+
+----- TG -----
+CREATE TRIGGER [ esquema. ]nombre_trigger
+ON { Tabla | Vista }
+{ FOR | AFTER | INSTEAD OF }
+{ [ INSERT ] [ , ] [ UPDATE ] [ , ] [ DELETE ] }
+[ WITH APPEND ]
+[ NOT FOR REPLICATION ]
+AS
+sentencia sql [ ; ]
+
+----- VW -----
+
+CREATE VIEW [esquema] NombreDeLaVista
+WITH
+
+ENCRYPTION
+SCHEMABINDING
+AS
+Consultas SQL
+WITH
+CHECK OPTION
+
+----- XML -----
+
+
+---- CONSTRAINT ---
+DEAFULT
+CREATE TABLE [Production].[Location]
+( ...
+[Availability] [decimal](8, 2) NOT NULL
+CONSTRAINT [DF_Location_Availability] DEFAULT ((0.00)),
+[ModifiedDate] [datetime] NOT NULL
+CONSTRAINT [DF_Location_ModifiedDate] DEFAULT (getdate())
+)
+
+PRIMARY KEY 
+CREATE TABLE [HumanResources].[Department]
+( [DepartmentID] [smallint] IDENTITY(1,1) NOT NULL, [Name]
+[dbo].[Name],
+...
+CONSTRAINT [PK_Department_DepartmentID] PRIMARY KEY CLUSTERED
+([DepartmentID] ASC)
+)
+CHECK
+ALTER TABLE [HumanResources].[EmployeeDepartmentHistory]
+WITH CHECK
+ADD CONSTRAINT [CK_EmployeeDepartmentHistory_EndDate]
+CHECK (([EndDate]>=[StartDate] OR [EndDate] IS NULL))
+
+UNIQUE
+CREATE TABLE [HumanResources].[Employee]
+( [EmployeeID] [int] IDENTITY(1,1) NOT NULL, [NationalIDNumber]
+[nvarchar](15) NOT NULL UNIQUE NONCLUSTERED,
+...
+)
+
+---- CREACION DE VARIABLES ----
+CREATE TYPE SSN FROM varchar(11) NOT NULL ;
+
+--- CREACION DE INDICES ---- 
+CREATE [ UNIQUE ] [ CLUSTERED | NONCLUSTERED ] INDEX index_name
+ON <object> ( column [ ASC | DESC ] [ ,...n ] )
+[ INCLUDE ( column_name [ ,...n ] ) ]
+[ WITH ( <relational_index_option> [ ,...n ] )
+
+INDICES UNIQUE
+CREATE UNIQUE NONCLUSTERED INDEX index_name ON table_name (
+Column_Name ASC| DESC)
+
+--- FRAGMENTACION DE INDICES ---
+<= 30% de fragmentación = Reorganizar
+ALTER INDEX index_name ON table_name REORGANIZE
+
+>= 30% de fragmentación = Volver a reconstruir
+ALTER INDEX index_name ON table_name REBUILD
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
