@@ -1,0 +1,546 @@
+----- SP -----
+Aceptan el envío de parámetros de entrada y salida
+Contienen una sentencia o grupo de sentencias
+Permiten ejecutar otros stored procedures
+Devolver valores de parámetros a un procedimiento de
+llamada o lote de instrucciones.
+Ejecutarse en SQL Server remotos
+
+El uso, nos ayuda a reducir el tráfico de red entre el cliente y servidor.
+A nivel de seguridad, nos ayuda a evitar las inyecciones SQL.
+Nos permiten reutilización de código (sentencias SQL).
+Al tener el código centralizado, nos permite un mantenimiento más fácil.
+Nos mejora el rendimiento de las consultas al trabajar con consultas pre compiladas.
+
+----- FN -----
+Pero, a diferencia de los stored procedure, las funciones
+pueden ser incluidas dentro de las sentencias SQL.
+Tipo de funciones: Funciones escalares, Funciones con valores de tabla en línea
+
+Función Escalar
+Son aquellas funciones donde retornan un valor único: tipo de datos
+como int, Money, varchar, real, etc. Pueden ser utilizadas en cualquier
+lugar, incluso, incorporada dentro de las sentencias SQL.
+
+Función con Valores de tabla
+Las funciones de tabla en línea son las funciones que devuelven la
+salida de una simple declaración SELECT. La salida se puede utilizar
+adentro de JOINS o querys como si fuera una tabla de estándar.
+
+----- RPT -----
+SSRS es una plataforma de reportes basada en servidor que
+nos permite generar reportes desde varios orígenes de
+datos.
+Las herramientas y servicios de SSRS permiten crear,
+implementar y administrar reportes.
+Para la visualización de los reportes se pueden usar
+diagramas, mapas y mini gráficos.
+
+Fase de los Reportes
+Procesamiento del informe (definición del informe, .rdl)
+Procesamiento de los datos (definición del informe), los
+resultados pasan a un formato intermedio.
+Representación, el formato intermedio a un formato de
+visualización.
+
+Report Builder
+Data Sources
+Un data source proporciona detalles acerca de cómo
+conectarse a un origen de datos.
+Hay dos tipos de orígenes de datos: Incrustados, Compartidos.
+Cada origen de datos especifica el tipo de origen de datos,
+la cadena de conexión y las credenciales.
+Datasets
+Un dataset especifica los campos del origen de datos que
+se van a usar en el informe.
+Un dataset contiene un puntero al origen de datos,
+parámetros de consulta y opciones de datos.
+
+----- TRG -----
+Cada trigger es específico de una o más operaciones de
+modificación de datos, UPDATE, INSERT o DELETE. El trigger se
+ejecuta una vez por cada instrucción.
+Los triggers son un tipo especial de procedimiento
+almacenado.
+Se usan para:
+Para forzar una regla de negocio.
+Mantener la integridad de datos.
+Consultar otras tablas.
+Incluir consultas complejas.
+TIPOS DE TRIGERS
+AFTER:
+Se ejecutan después que la sentencia SQL ha sido realizada.
+No se ejecutan si ocurre un error al comprobar las restricciones definidas de la tabla.
+INSTEAD OF:
+Anulan las sentencias SQL que han generado su ejecución.
+Son ideales para revisar valores o realizar acciones adicionales antes de ejecutar la sentencia DML.
+CLR:
+Pueden ser AFTER o INSTEAD OF. Ejecutan uno o mas métodos
+escritos en código administrado que son parte de un assembly.
+
+FUNCION | AFTER | INSTEAD OF
+Aplicable a| Tablas |Tablas y Vistas
+Cantidad por tabla o vista| Varios por DML| Uno por DML
+Se ejecutan|Después de:
+La revisión de restricciones.
+Acciones referenciales declarativas.
+Que se crean tablas
+inserted/deleted
+La acción que genera el trigger
+|
+Antes de:
+De la revisión de restricciones.
+En lugar de:
+La acción que genera el trigger.
+Después de:
+Que se crean las inserted y deleted
+
+----- VST -----
+Es una tabla virtual que contiene columnas y filas, se genera
+en base al resultado de una consulta SQL.
+La vista pueden estar compuesta por los datos de una o
+más tablas.
+
+Permite simplificar la complejidad de la base de datos de
+acuerdo al requerimiento de los usuarios.
+Se puede usar como mecanismo de seguridad, puesto que
+sólo es necesario dar permisos a las vistas y no a las tablas
+base.
+Permite manejar cambios de estructura en las tablas base
+sin que los usuarios se vean afectados, debido a que solo
+utilizan las vistas y no conocen la estructura de las tablas
+base.
+
+El orden de los datos no está garantizado, sólo es posible
+utilizar ORDER BY cuando en la sentencia se usa la cláusula
+TOP.
+Todas las columnas deben de tener un nombre.
+Los nombres de las columnas deben ser únicos.
+No se puede usar una referencia a una tabla temporal o a
+una variable de tabla.
+
+----- XML -----
+Cuando ejecutamos una sentencia SELECT en la base de
+datos, el resultado se nos presenta como un conjunto de
+filas.
+A través del uso de FOR XML es posible que el resultado
+se nos presente como XML.
+Al usar FOR XML, es posible especificar un modo:
+RAW, AUTO, EXPLICIT, PATH
+El modo RAW transforma cada fila del conjunto de resultados de la
+consulta en un elemento XML que tiene el identificador genérico
+<row> o el nombre del elemento, que se proporciona de manera
+opcional.
+ELEMENTS - XSINIL, XMLDATA, XMLSCHEMA
+El modo AUTO devuelve los resultados de la consulta como
+elementos XML anidados.
+Las consultas en modo AUTO son útiles si desea generar jerarquías
+sencillas
+El modo EXPLICIT concede un mayor control de la forma del XML. Es
+posible mezclar atributos y elementos con total libertad para decidir
+la forma del XML.
+El modo PATH facilita la combinación de elementos y atributos.
+También, facilita la especificación de anidación adicional para
+representar propiedades complejas.
+
+¿Qué es OPENXML?
+Proporciona un conjunto de filas en
+documentos XML en memoria que es
+similar a una tabla o una vista.
+Puede utilizarse en instrucciones SELECT y
+SELECT INTO.
+Para escribir consultas en un documento
+XML mediante OPENXML, primero es
+necesario llamar a
+sp_xml_preparedocument.
+OPENXML ( iddoc, patrón, [flag] )[ WITH (Esquema|Tabla)]
+Donde:
+iddoc: identificador del documento XML
+patrón: consulta Xpath para definir la respuesta
+flag: determina si se centra en atributos o elementos:
+0: valor predeterminado (atributos)
+1: recuperar valores de atributos
+2: recuperar valores de elementos
+3: recuperar valores de atributos y elementos
+esquema: declaración del esquema
+tabla: nombre de la tabla de la cual se utilizará su esquema
+
+XQuery
+
+XQuery se utiliza para poder realizar consultas a datos XML que
+están almacenados en tipos de datos o variables xml en SQL
+Server.
+Tenemos disponibles:
+Métodos, como: query, value y exist
+Funciones, como: round(), concat(), count(), min(), max(), avg(), sum()
+Expresiones FLWOR: for, let, where, order by y return.
+
+----- TDATOS -----
+RESTRICCIONES: DOMINIO (DEFAULT,CHECK,FOREIGN KEY, NULL, PRIMARY KEY,)
+ENTIDAD(PRIMARY KEY,UNIQUE)
+REFERENCIAL(FOREIGN KEY, CHECK)
+
+Constraints DEFAULT
+Un constraints DEFAULT define un valor de columna predeterminado
+cuando no se proporciona ningún valor
+Cada columna sólo puede tener una restricción DEFAULT
+Sólo es aplicable a instrucciones INSERT
+Se permiten algunas funciones suministradas por el sistema
+Constraints CHECK
+Los constraints CHECK restringen los valores que se pueden
+introducir en una columna con INSERT o con UPDATE
+Puede definir varios constraints CHECK por columna
+Puede hacer referencia a columnas de la misma tabla
+No puede contener subconsultas
+
+Constraints UNIQUE
+Los constraints UNIQUE aseguran que todos los valores de una
+columna son únicos
+Sólo se permite un valor nulo en una columna única
+Pueden incluir una o más columnas
+
+
+TIPOS DE DATOS DEL SISTEMA
+Se crean con la instrucción:
+CREATE TYPE
+El siguiente ejemplo crea un tipo de alias basado en el tipo de
+datos (varchar) proporcionado por el sistema:
+CREATE TYPE SSN FROM varchar(11) NOT NULL ;
+
+-- INDICES
+Diseño de índices
+Índice Clustered (Agrupados),Heap, Índice NonClustered (No Agrupados)
+
+Índice Clustered (Agrupados)
+Se ordenan físicamente en el disco dependiendo del criterio
+que se aplica ya sea de manera ascendente o descendente.
+
+Heap
+Los registros se ingresaran en el primer
+espacio disponible dentro de las
+páginas pertenecientes a la tabla.
+Mantienen los registros en las páginas
+de datos en el mismo orden en el que
+se han insertado
+
+Índice NonClustered (No Agrupados)
+Sus datos no pueden ser ordenados en el disco por lo que crean una
+estructura adicional y sobre dicha estructura creada se ordenan
+
+Se crean para mejorar el rendimiento de las consultas
+utilizadas con frecuencia no cubiertas por el índice clustered
+(Agrupado)
+
+Para realizar la optimización de índices, podemos utilizar:
+Database Engine Tuning Advisor
+Fragmentación de índices
+Opciones para desfragmentar índices
+
+--- FILEGROUPS ---
+FileGroups
+Una base de datos tiene un grupo de archivos
+principal, contiene el archivo de datos primario.
+Se pueden crear grupos de archivos adicionales
+con el objetivo de mejorar la administración,
+asignación de datos y ubicación de los archivos.
+FileGroups
+Los archivos se almacenan:
+Grupo Principal
+Grupo Definido por el usuario
+
+Particionamiento Vertical
+El particionamiento vertical de tablas es principalmente usado para
+incrementar el desempeño de SQL Server especialmente en casos
+cuando una consulta es demasiado compleja en el resultado de
+datos.
+
+Particionamiento horizontal
+El particionamiento horizontal divide una tabla en múltiples tablas
+que contienen el mismo número de columnas, pero menos filas.
+
+------- DEL PARCIAL ---------
+XML DEL PARCIAL
+<Elecciones2018>
+	<Candidato>
+		<Datos>
+			<Registro>ABC123</Registro>
+			<Habilitado>si</Habilitado>
+		</Datos>
+		<Partido codigo="1">
+			<Nombre>Partido 789</Nombre>
+		</Partido>
+		<Resultado>
+			<Distrito id="01">
+				<Nombre>Distrito 123</Nombre>
+				<Votos>10</Votos>
+			</Distrito>
+			<Distrito id="02">
+				<Nombre>Distrito 345</Nombre>
+				<Votos>5</Votos>
+			</Distrito>
+		</Resultado>
+	</Candidato>
+	<Candidato>
+		<Datos>
+			<Registro>ABC789</Registro>
+			<Habilitado>si</Habilitado>
+		</Datos>
+		<Partido codigo="2">
+			<Nombre>Partido 852</Nombre>
+		</Partido>
+		<Resultado>
+			<Distrito id="08">
+				<Nombre>Distrito 963</Nombre>
+				<Votos>11</Votos>
+			</Distrito>
+			<Distrito id="09">
+				<Nombre>Distrito 258</Nombre>
+				<Votos>3</Votos>
+			</Distrito>
+		</Resultado>
+	</Candidato>
+</Elecciones2018>
+Declare @dataXml as XML;
+set @dataXml='<Elecciones2018>
+	<Candidato>
+		<Datos>
+			<Registro>ABC123</Registro>
+			<Habilitado>si</Habilitado>
+		</Datos>
+		<Partido codigo="1">
+			<Nombre>Partido 789</Nombre>
+		</Partido>
+		<Resultado>
+			<Distrito id="01">
+				<Nombre>Distrito 123</Nombre>
+				<Votos>10</Votos>
+			</Distrito>
+			<Distrito id="02">
+				<Nombre>Distrito 345</Nombre>
+				<Votos>5</Votos>
+			</Distrito>
+		</Resultado>
+	</Candidato>
+	<Candidato>
+		<Datos>
+			<Registro>ABC789</Registro>
+			<Habilitado>si</Habilitado>
+		</Datos>
+		<Partido codigo="2">
+			<Nombre>Partido 852</Nombre>
+		</Partido>
+		<Resultado>
+			<Distrito id="08">
+				<Nombre>Distrito 963</Nombre>
+				<Votos>11</Votos>
+			</Distrito>
+			<Distrito id="09">
+				<Nombre>Distrito 258</Nombre>
+				<Votos>3</Votos>
+			</Distrito>
+		</Resultado>
+	</Candidato>
+</Elecciones2018>';
+
+select
+@dataXml.query('count(Elecciones2018/Candidato/Resultado/Distrito)')as Total_Distritos,
+@dataXml.query('sum(Elecciones2018/Candidato/Resultado/Distrito/Votos)')as Total_votos,
+@dataXml.query('max(Elecciones2018/Candidato/Resultado/Distrito/Votos)')as Max_votos,
+@dataXml.query('min(Elecciones2018/Candidato/Resultado/Distrito/Votos)')as Min_votos
+
+
+----- NOTAS  DEL PARCIAL ------
+------ TEORIA CREACION BD ------
+/*
+BD DEL SISTEMA
+MASTER: TIENE INFORMACION DEL SERVIDOR
+MSDB: ES USADA POR EL SERVIDOR PARA PROGRAMAR TAREAS Y ALERTAS
+MODEL: SIRVE DE PLANTILLA
+TEMPDB: TIENE OBJETOS TEMPORALES
+RESOURCE: DB QUE CONTIENE OBJETOS DEL SISTEMA (SYS)
+VISTAS DE CATALOGO: PEMITEN ACCEDER A LOS METADATOS DEL SERVIDOR
+
+CREATE DATABASE NOMBRE
+ON PRIMARY
+(
+NAME = NOMBRE_DATA,
+FILENAME = 'C:\TEMP\NOMBRE_DATA.MDF',
+SIZE = 10MB,
+MAXSIZE = 50MB,
+FILEGROWTH = 5MB)
+LOG ON
+(
+NAME = NOMBRE_LOG,
+FILENAME = 'C:\TEMP\NOMBRE_LOG.LDF',
+SIZE = 50MB,
+MAXSIZE = 25,
+FILEGROWTH = 5MB
+)
+
+*/
+---- FIN TEORIA CREACION BD ---
+
+-- TEORIA FILEGROUPS Y PARTICIONAMIENTO --
+/*
+ .MDF:DATOS DE LAS TABLAS
+ .NDF:ARCHIVO SECUNDARIOD DE DATOS DE LAS TABLAS
+ .LDF:CONTIENE LAS CONSULTAS, TRANSACCIONES
+
+-- CREACION DE PARTICION 
+CREATE PARTITION FUNCTION Particion01 (int)
+AS RANGE right
+FOR VALUES (1,100,1000)
+
+-- DEFINICION DE ESQUEMA 3 FILEGROUPS
+CREATE PARTITION SCHEME Esquema01
+AS PARTITION Particion01
+TO ([PRIMARY], Fg01, Fg02, Fg03)
+
+-- AL CREAR LA TABLE AGREGAR AL FINAL 'on Esquema01(IDTABLA)'
+-- CONSULTAR ESTRUCTURA DE TABLA
+DECLARE @TableName sysname = 'Countries';
+SELECT OBJECT_NAME([object_id]) AS table_name, p.partition_number, fg.name, p.rows
+FROM sys.partitions p INNER JOIN sys.allocation_units au ON au.container_id = p.hobt_id
+INNER JOIN sys.filegroups fg ON fg.data_space_id = au.data_space_id
+WHERE p.object_id = OBJECT_ID(@TableName)
+-- CONOCER ESTADO DE BD
+SP_HELPDB BDNAME
+*/
+---- FIN TEORIA FILEGROUPS -----
+
+------ TEORIA DE INDICES -------
+/*
+INDICE CLUSTER: SE ORDENAN FISICAMENTE EN DISCO
+HEAP: NUEVOS REGISTROS SE INSERTAR EN EL PRIMER ESPACIO DISPONIBLE
+INDICE NON CLUSTER: NO PUEDEN ORDENARSE EN DISCO, CREAN UNA ESTRUCTURA LOGICA
+
+USE DATABASENAME
+CREATE NONCLUSTERED INDEX IX_Contact_Countryname_Formalname_Transact
+ON Countries (FormalName ASC,CountryName ASC) INCLUDE (Region,Subregion)
+WITH (FILLFACTOR = 80, ONLINE = ON)
+
+<= 30% de fragmentación = Reorganizar
+ALTER INDEX index_name ON table_name REORGANIZE
+>= 30% de fragmentación = Volver a reconstruir
+ALTER INDEX index_name ON table_name REBUILD
+*/
+---- FIN TEORIA DE INDICES -----
+
+---- TEORIA DE INTEGRIDAD ------
+/*
+CONSTRAINTS
+DEFAULT: ESPECIFICA VALOR POR DEFECTO DE UNA COLUMNA
+CHECK: VALIDA VALORES PERMITIDOS POR COLUMNA
+FOREIGN KEY: VALORES QUE DEBEN EXISTIR
+NULL: PERMITE VACIOS
+PRIMARY KEY: INDICA ID
+UNIQUE: NO PERMITE DUPLICACION DE CLAVE NO PRINCIPALES
+
+create table PRESTAMO
+(
+codOper char(7) not null,
+idMatBiblio varchar(20) not null,
+idUsuario char(8) not null,
+fechaP smalldatetime not null,
+fechaD smalldatetime not null,
+ndias int not null,
+constraint PK_PRESTAMO_codOper PRIMARY KEY (codOper),
+constraint FK_PRESTAMO_idMatBiblio FOREIGN KEY (idMatBiblio) REFERENCES MAT_BIBLIO(idMatBiblio),
+constraint FK_PRESTAMO_idUsuario FOREIGN KEY (idUsuario) REFERENCES USUARIO(idUsuario)
+)
+
+-- ELEMINAR RELACION 
+ALTER TABLE [HumanResources].[Employee] DROP CONSTRAINT [CK_Employee_Gender]
+*/
+--- FIN TEORIA DE INTEGRIDAD ---
+
+---------- TEORIA XML ----------
+/*
+ COMANDO: for xml + :PARAMETRO:
+ RAW: MUESTRA LA INFORMACION COMPLETA POR FILA
+ AUTO: MUESTRA LA INFORMACION AGRUPADA POR ID
+ EXPLICIT: PERMITE EDITAR COMO ES LA ESTRUCTURA [1 AS TAG, !1!,!Element]
+ PATH: MANTIENE LA ESTRUCTURA DE LA TABLA SEPARANDO POR ATRIBUTO
+*/
+-- CREACION DE TABLA MEDIANTE XML
+/*declare @doc int
+declare @xmldoc nvarchar(1000)
+set @xmldoc = 
+N'<ROOT>
+	<Cliente IDCliente="UPC" Nombre="NOMBREUPC">
+		<Pedido IDPedido="10283" IDCliente="UPC" IDEmpleado="3"
+		Fecha="2018-10-19T:00:00">
+		<PedidoDetalle IDProducto="72" Cantidad="3"/>
+		</Pedido>
+	</Cliente>
+</ROOT>'
+-- crea xml
+exec SP_XML_PREPAREDOCUMENT @doc output, @xmldoc
+select * from openxml (@doc,'/ROOT/Cliente',1)
+WITH (IDCliente varchar(10),
+Nombre varchar(42))
+exec SP_XML_REMOVEDOCUMENT @doc
+
+ XQUERY ROUND,CONCAT,COUNT,MIN,MAX,AVG,SUM()
+
+DECLARE @DATAXML AS XML;
+SET @DATAXML = '<Cursos>
+	<Curso id="5" >
+		<Nombre>base de datos</Nombre>
+	</Curso>
+	<Curso id="10" >
+		<Nombre>sql server</Nombre>
+		<Codigo>82</Codigo>
+	</Curso>
+</Cursos>';
+Select 
+@DATAXML.query('*') as InfoCompleta,
+@DATAXML.query('data(*)') as DataCompleta,
+@DATAXML.query('data(Cursos/Curso[@id=10])') as DataElemento,
+@DATAXML.query('data(Cursos/Curso/Codigo)') as DataElemento
+
+ FUNCION FLWOR
+DECLARE @DATAXML AS XML;
+SET @DATAXML = '<Ventas>
+	<Cliente id="5">
+		<Pedido total="906.00" />
+		<Pedido total="920.00" />
+	</Cliente>
+	<Cliente id="10">
+		<Pedido total="722.00" />
+	</Cliente>
+</Ventas>';
+SELECT @DATAXML.query('
+for $i in //Cliente
+return
+<Pedidos>
+	<NroPedidos>{count($i/Pedido)}</NroPedidos>
+	<VentaPedidos>{sum($i/Pedido/@total)}</VentaPedidos>
+</Pedidos>
+');
+
+ CREACION DE INDICES XML
+ CREATE PRIMARY XML INDEX XMLPATH_JOBCANDIDATE_RESUME 
+ ON HUMANRESOURCES.JOBCANDIDATE(Resume)
+ CREATE XML INDEX XMLPATH_JOBCANDIDATE_RESUME2 ON HUMANRESOURCES.JOBCANDIDATE(Resume)
+ USING XML INDEX XMLPATH_JOBCANDIDATE_RESUME FOR PATH;
+ GO
+
+ TABLA ASOCIADA A XML
+CREATE TABLE HumanResources.EmployeeResume
+(EmployeeID int,
+Resume xml (EmployeeResumeSchemaCollection))
+
+INSERT INTO HumanResources.EmployeeResume
+VALUES
+(1,
+'<?xml version="1.0" ?>
+<resume xmlns="http://schemas.adventure-works.com/EmployeeResume">
+<name>Guy Gilbert</name>
+<employmentHistory>
+<employer endDate="2000-07-07">Northwind Traders</employer>
+<employer>Adventure Works</employer>
+</employmentHistory>
+</resume>')
+*/
+---------- FIN TEORIA XML ----------
